@@ -9,6 +9,6 @@ class QuoteController
 {
     public function index(): QuoteResource
     {
-        return new QuoteResource(Quote::getQuotes(5));
+        return new QuoteResource(Quote::getQuotes());
     }
 }

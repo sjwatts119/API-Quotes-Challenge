@@ -18,7 +18,7 @@ class Quotes extends Component
 
     public function getQuotes(): void
     {
-        $this->quotes = Quote::getQuotes(5);
+        $this->quotes = Quote::getQuotes();
     }
 
     public function render(): View

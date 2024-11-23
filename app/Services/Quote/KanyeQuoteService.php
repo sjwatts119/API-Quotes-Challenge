@@ -12,7 +12,7 @@ class KanyeQuoteService implements QuoteService
     protected function request(): Collection
     {
         $quotes = Cache::flexible(
-            key: 'kanye_quotes',
+            key: 'kanye-quotes',
             ttl: [now()->addHour(), now()->addDay()],
             callback: function () {
                 return Http::get('https://api.kanye.rest/quotes')->json();
@@ -21,7 +21,7 @@ class KanyeQuoteService implements QuoteService
         return collect($quotes);
     }
 
-    public function getQuotes(int $quoteCount = 1): Collection
+    public function getQuotes(int $quoteCount = 5): Collection
     {
         return $this->request()->random($quoteCount);
     }
