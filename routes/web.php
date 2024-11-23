@@ -1,5 +1,6 @@
 <?php
 
+use App\Facades\Quote;
 use Illuminate\Support\Facades\Route;
 use App\Services\QuoteService;
 
@@ -14,6 +15,6 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard')
-            ->with('quotes', app(QuoteService::class)->getQuotes(5));
+            ->with('quotes', Quote::getQuotes(5));
     })->name('dashboard');
 });
