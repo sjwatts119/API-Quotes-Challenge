@@ -6,9 +6,15 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
-                <x-welcome />
+        <div class="max-w-7xl mx-auto">
+            <div class="px-16 py-8 bg-white dark:bg-gray-800 shadow-xl rounded-lg">
+                <ul class="list-disc">
+                    @foreach($quotes as $quote)
+                        <li class="text-4xl dark:text-gray-200">
+                            {{ $quote }}
+                        </li>
+                    @endforeach
+                </ul>
             </div>
         </div>
     </div>
