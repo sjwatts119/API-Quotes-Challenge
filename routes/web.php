@@ -14,7 +14,6 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard')
-            ->with('quotes', Quote::getQuotes(5));
+        return view('dashboard');
     })->name('dashboard');
 });
