@@ -2,6 +2,7 @@
 
 namespace App\Services\Quote;
 
+use App\Exceptions\FailedKanyeQuoteResponseException;
 use App\Services\QuoteService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
@@ -11,14 +12,20 @@ class KanyeQuoteService implements QuoteService
 {
     protected function request(): Collection
     {
-        $quotes = Cache::flexible(
+        $response = Cache::flexible(
             key: 'kanye-quotes',
             ttl: [now()->addHour(), now()->addDay()],
             callback: function () {
-                return Http::get('https://api.kanye.rest/quotes')->json();
+                $response = Http::get('https://api.kanye.rest/quotes');
+
+                if($response->failed()) {
+                    throw new FailedKanyeQuoteResponseException($response);
+                }
+
+                return $response->json();
         });
 
-        return collect($quotes);
+        return collect($response);
     }
 
     public function getQuotes(int $quoteCount = 5): Collection
